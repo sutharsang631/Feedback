@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_feedback" resource="default" engine="innodb" comment="Customer Feedback Table">
+        <column xsi:type="int" name="feedback_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Feedback ID" />
+        <column xsi:type="varchar" name="first_name" nullable="false" length="255" comment="First Name" />
+        <column xsi:type="varchar" name="last_name" nullable="false" length="255" comment="Last Name" />
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email" />
+        <column xsi:type="text" name="feedback" nullable="false" comment="Feedback" />
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="feedback_id"/>
+        </constraint>
+    </table>
+</schema>

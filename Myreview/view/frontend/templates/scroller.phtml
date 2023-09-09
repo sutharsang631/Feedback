@@ -1,0 +1,124 @@
+<div class="feedback-scroller-container">
+    <div class="feedback-scroller">
+        <ul class="feedback-list">
+            <?php $feedbacks = $block->getApprovedFeedback(); ?>
+            <?php foreach ($feedbacks as $index => $feedback): ?>
+                <li>
+                    <span class="user-name"><?php echo $feedback->getFirstName() . ' ' . $feedback->getLastName(); ?>:</span>
+                    <span class="feedback-text"><?php echo $feedback->getFeedback(); ?></span>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="dot-buttons">
+        <?php foreach ($feedbacks as $index => $feedback): ?>
+            <button class="dot-button" data-index="<?php echo $index; ?>"></button>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<style>
+/* Define styles for the scroller container (no change) */
+.feedback-scroller-container {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+}
+
+/* Define styles for the scroller itself (no change) */
+.feedback-scroller {
+    display: inline-block;
+}
+
+/* Define animation keyframes (no change) */
+@keyframes scroll {
+    0%, 100% {
+        transform: translateX(100%);
+    }
+    5%, 95% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Style the feedback list (no change) */
+.feedback-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the user name and feedback text (no change) */
+.feedback-list li {
+    display: block;
+    padding: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.feedback-text {
+    margin-left: 10px;
+}
+
+/* Style the dot buttons (no change) */
+.dot-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot-button {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #ccc;
+    display: inline-block;
+}
+
+.dot-button.active {
+    background-color: #333;
+}
+</style>
+
+<script>
+    var currentIndex = 0;
+    var items = document.querySelectorAll('.feedback-list li');
+    var scrollDuration = 5000; // Time (in milliseconds) for each item
+
+    function showItem(index) {
+        for (var i = 0; i < items.length; i++) {
+            items[i].style.display = 'none';
+        }
+        items[index].style.display = 'block';
+
+        // Update the active dot button
+        var dotButtons = document.querySelectorAll('.dot-button');
+        for (var i = 0; i < dotButtons.length; i++) {
+            dotButtons[i].classList.remove('active');
+        }
+        dotButtons[index].classList.add('active');
+    }
+
+    function scrollItems() {
+        showItem(currentIndex);
+        currentIndex = (currentIndex + 1) % items.length;
+
+        // Delay the next scroll
+        setTimeout(scrollItems, scrollDuration);
+    }
+
+    // Start scrolling
+    scrollItems();
+
+    // Dot buttons
+    var dotButtons = document.querySelectorAll('.dot-button');
+    dotButtons.forEach(function (button, index) {
+        button.addEventListener('click', function () {
+            currentIndex = index;
+            showItem(currentIndex);
+        });
+    });
+</script>

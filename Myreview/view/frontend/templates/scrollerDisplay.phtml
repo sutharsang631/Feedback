@@ -1,0 +1,68 @@
+<!-- app/code/CustomFeedBack/FeedBackModule/view/frontend/templates/scroller.phtml -->
+<div class="feedback-scroller">
+    <div class="scroller-wrapper">
+        <ul class="scroller-list">
+            <?php $feedbackCollection = $block->getFeedbackData(); ?>
+            <?php if ($feedbackCollection && $feedbackCollection->getSize() > 0): ?>
+                <?php foreach ($feedbackCollection as $index => $feedback): ?>
+                    <li class="scroller-item">
+                        <p>Name: <?php echo $feedback->getFirstName() . ' ' . $feedback->getLastName(); ?></p>
+                        <p>FeedBack: <?php echo $feedback->getComment(); ?></p>
+                    </li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <li class="no-feedback">No validated feedback found.</li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>
+<style>
+    .feedback-scroller {
+        max-width: 300px; 
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroller-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .scroller-item {
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .scroller-item p {
+        margin: 0;
+        padding: 5px 0;
+    }
+
+    .scroller-controls {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .prev-btn,
+    .next-btn {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .prev-btn:disabled,
+    .next-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+</style>

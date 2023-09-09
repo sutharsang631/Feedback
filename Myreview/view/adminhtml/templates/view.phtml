@@ -1,0 +1,83 @@
+<?php
+$data = $block->getDbData();
+if ($data) {
+    $firstname = $data->getFirstName();
+    $lastname = $data->getLastName();
+    $comment = $data->getFeedback();
+    $email = $data->getEmail();
+    ?>
+    <div class="container">
+        <h2 class="name">
+            <h3>Approval</h3>
+            <?= $firstname . ' ' . $lastname ?>
+        </h2>
+        <div class="comment">
+            <h3>
+                <?= $comment ?>
+            </h3>
+        </div>
+
+        <div class =  "email">
+            <h3>
+                <?= $email ?>
+            </h3>
+
+        </div>
+        <a href="<?= $block->getUrl('myreview1/index/accept', ['id' => $data->getFeedbackId()]) ?>"
+           class="my-link">Accept</a>
+        <a href="<?= $block->getUrl('myreview1/index/reject', ['id' => $data->getFeedbackId()]) ?>"
+           class="my-link">Decline</a>
+    </div>
+    <?php
+} else {
+    echo "Data not found or not loaded correctly.";
+}
+?>
+<style>
+    /* Container styles */
+.container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Title styles */
+.name {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Comment styles */
+.comment {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Email styles */
+.email {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* Link styles */
+.my-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.my-link:hover {
+    background-color: #0056b3;
+}
+
+</style>

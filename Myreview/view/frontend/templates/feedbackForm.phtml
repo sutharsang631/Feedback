@@ -1,0 +1,58 @@
+<div class="myreview-form">
+<form method="post"  data-mage-init='{"validation": {}}' action="<?= /* @escapeNotVerified */ $block->getActionUrl() ?>" method="post" id="form-validate" name="feedback_form" autocomplete="off">
+<fieldset class="fieldset create info" >
+        <div class="field required">
+            <label for="first_name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('First Name') ?></span>
+            </label>
+
+            <div class="control">
+                <input type="text" id="first_name"
+                       name="first_name"
+                       class="input-text"
+                       data-validate='{"required":true}'
+                       value= <?php echo $block->getCustomerFirstName(); ?> >
+            </div>
+            <label for="last_name" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Last Name') ?></span>
+            </label>
+
+            <input type="text" id="last_name"
+                   name="last_name"
+                   class="input-text"
+                   data-validate='{"required":true}'
+                   value= <?php echo $block->getCustomerLastName(); ?> >
+
+            <label for="email" class="label">
+                <span><?php /* @escapeNotVerified */ echo __('Email') ?></span>
+            </label>
+
+            <div class="control">
+                <input type="email" id="email"
+                       name="email"
+                       class="input-text"
+                       data-validate='{"required":true,"validate-email":true}'
+                       value= <?php echo $block->getCustomerEmail(); ?> >
+            </div>
+
+            <label for="feedback" class="feedback">
+                <span><?php /* @escapeNotVerified */ echo __('feedback') ?></span>
+            </label>
+
+            <div class="control">
+                <textarea id="feedback" class="required-entry" name="feedback" ></textarea>
+            </div>
+        </div>
+        </div>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Submit') ?>">
+                <span><?php /* @escapeNotVerified */ echo __('Submit') ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+</div>
+

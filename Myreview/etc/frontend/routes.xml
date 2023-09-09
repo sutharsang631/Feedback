@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard"> <!-- Replace 'frontname' with the actual frontname of your module -->
+        <route id="myreview" frontName="myreview"> <!-- Replace 'routename' and 'frontname' -->
+            <module name="Feedback_Myreview" /> <!-- Replace 'VendorName_ModuleName' -->
+        </route>
+    </router>
+</config>
