@@ -179,26 +179,20 @@ class ConfigDump extends Template
         foreach ($configArray as $key => $value) {
             $newKey = empty($parentKey) ? $key : $parentKey . $separator . $key;
             if (is_array($value)) {
-                if (strpos($newKey, 'modules') !== 0) { // Skip rows with 'module' in parent key
-                    $result += $this->flattenConfigArray($value, $newKey, $separator);
-            
-                }
+                $result += $this->flattenConfigArray($value, $newKey, $separator);
             } else {
                 // Extract the initial key (the first part before $separator)
                 $initialKey = explode($separator, $newKey)[0];
-
-                // Skip rows with 'module' in parent key
-                if ($initialKey !== 'modules') {
-                    $result[] = [
-                        'parent_key' => $initialKey,
-                        'key' => $newKey,
-                        'value' => $value,
-                    ];
-                }
+                $result[] = [
+                    'parent_key' => $initialKey,
+                    'key' => $newKey,
+                    'value' => $value,
+                ];
             }
         }
         return $result;
     }
+
 
     /**
      * Get the last execution time of a custom cron job.
