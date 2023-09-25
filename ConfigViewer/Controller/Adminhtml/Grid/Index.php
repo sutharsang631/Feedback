@@ -1,10 +1,13 @@
 <?php
 namespace Custom\ConfigViewer\Controller\Adminhtml\Grid;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
-use Magento\Backend\App\Action;
 
+/**
+ * Controller for managing the grid in the admin panel.
+ */
 class Index extends Action
 {
     /**
@@ -13,39 +16,31 @@ class Index extends Action
     protected $_resultPageFactory;
 
     /**
+     * Index constructor.
+     *
      * @param Context $context
      * @param PageFactory $resultPageFactory
      */
-    public function __construct(
-        Context $context,
-        PageFactory $resultPageFactory
-    ) {
+    public function __construct(Context $context, PageFactory $resultPageFactory)
+    {
         parent::__construct($context);
         $this->_resultPageFactory = $resultPageFactory;
     }
 
     /**
-     * Grid List page.
-     *
-     * @return Page
+     * Execute the action.
      */
     public function execute()
     {
-        /** @var Page $resultPage */
+        if (!$this->_authorization->isAllowed('Custom_ConfigViewer::configviewer_cron')) {
+            $this->messageManager->addErrorMessage(__('You do not have permission to access this.'));
+            return $this->_redirect('admin/dashboard/index');
+        }
+
         $resultPage = $this->_resultPageFactory->create();
-        $resultPage->setActiveMenu('Customl_Grid::grid_list');
+        $resultPage->setActiveMenu('Custom_ConfigViewer::gridmanager');
         $resultPage->getConfig()->getTitle()->prepend(__('Grid List'));
 
         return $resultPage;
-    }
-
-    /**
-     * Check Grid List Permission.
-     *
-     * @return bool
-     */
-    protected function _isAllowed()
-    {
-        return $this->_authorization->isAllowed('Custom_ConfigViewer::grid_list');
     }
 }
