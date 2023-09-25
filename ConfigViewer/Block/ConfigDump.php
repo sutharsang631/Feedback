@@ -6,7 +6,6 @@ use Magento\Framework\ObjectManagerInterface;
 use Custom\ConfigViewer\Model\ResourceModel\ConfigData as ConfigDataResource;
 use Magento\Cron\Model\Config\Reader\Xml;
 use Magento\Cron\Model\Schedule;
-use Custom\ConfigViewer\Model\ConfigData;
 
 /**
  * Class ConfigDump
@@ -152,7 +151,7 @@ class ConfigDump extends Template
      */
     private function getConfigDataByKeys($parentKey, $key)
     {
-        $configDataModel = $this->objectManager->create(ConfigData::class);
+        $configDataModel = $this->objectManager->create(\Custom\ConfigViewer\Model\ConfigData::class);
         $configData = $configDataModel->getCollection()
             ->addFieldToFilter('parent_key', $parentKey)
             ->addFieldToFilter('key', $key)
@@ -179,20 +178,25 @@ class ConfigDump extends Template
         foreach ($configArray as $key => $value) {
             $newKey = empty($parentKey) ? $key : $parentKey . $separator . $key;
             if (is_array($value)) {
-                $result += $this->flattenConfigArray($value, $newKey, $separator);
+                if (strpos($newKey, 'module') !== 0) { // Skip rows with 'module' in parent key
+                    $result += $this->flattenConfigArray($value, $newKey, $separator);
+                }
             } else {
                 // Extract the initial key (the first part before $separator)
                 $initialKey = explode($separator, $newKey)[0];
-                $result[] = [
-                    'parent_key' => $initialKey,
-                    'key' => $newKey,
-                    'value' => $value,
-                ];
+
+                // Skip rows with 'module' in parent key
+                if ($initialKey !== 'module') {
+                    $result[] = [
+                        'parent_key' => $initialKey,
+                        'key' => $newKey,
+                        'value' => $value,
+                    ];
+                }
             }
         }
         return $result;
     }
-
 
     /**
      * Get the last execution time of a custom cron job.
