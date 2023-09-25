@@ -1,4 +1,4 @@
-<p>Last Execution Time: <?= $block->getLastExecutionTime() ?></p>
+<p>Last Execution Time: <?= $block->escapeHtml($block->getLastExecutionTime()) ?></p>
 <table class="data table" id="custom-config-table">
     <thead>
         <tr>
@@ -10,9 +10,9 @@
     <tbody>
         <?php foreach ($block->flattenConfigArray($block->getConfigArray()) as $data): ?>
             <tr>
-                <td><?= $data['parent_key'] ?></td>
-                <td><?= $data['key'] ?></td>
-                <td><?= $data['value'] ?></td>
+                <td><?= $block->escapeHtml($data['parent_key']) ?></td>
+                <td><?= $block->escapeHtml($data['key']) ?></td>
+                <td><?= $block->escapeHtml($data['value']) ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

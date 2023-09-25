@@ -78,12 +78,5 @@
             </argument>
         </column>
 
-
-
-       <actionsColumn name="actions" class="Custom\ConfigViewer\Ui\Component\Listing\Grid\Column\Action">
-           <settings>
-                <indexField>entity_id</indexField>
-            </settings>
-       </actionsColumn>
     </columns>
 </listing>

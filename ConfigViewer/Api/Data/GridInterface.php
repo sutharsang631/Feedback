@@ -6,10 +6,10 @@ interface GridInterface
     /**
      * Constants for keys of data array. Identical to the name of the getter in snake case.
      */
-    const ENTITY_ID = 'entity_id';
-    const PARENT_KEY = 'parent_key';
-    const KEY = 'key';
-    const VALUE = 'value';
+    public const ENTITY_ID = 'entity_id';
+    public const PARENT_KEY = 'parent_key';
+    public const KEY = 'key';
+    public const VALUE = 'value';
 
     /**
      * Get EntityId.

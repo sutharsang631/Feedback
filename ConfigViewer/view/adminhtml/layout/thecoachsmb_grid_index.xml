@@ -4,8 +4,5 @@
         <referenceContainer name="content">
         	<uiComponent name="thecoachsmb_grid_listing"/>
         </referenceContainer>
-        <!-- <referenceContainer name="content">
-            <block class="Custom\ConfigViewer\Block\Adminhtml\ConfigDump" name="custom.configdump" template="Custom_ConfigViewer::configdump.phtml"/>
-        </referenceContainer> -->
     </body>
 </page>
