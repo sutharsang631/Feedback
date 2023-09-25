@@ -43,7 +43,7 @@ class ConfigDump extends Template
     /**
      * ConfigDump constructor.
      *
-     * @param Context $context
+     * @param Template\Context $context
      * @param ObjectManagerInterface $objectManager
      * @param ConfigDataResource $configDataResource
      * @param Xml $xmlReader
@@ -51,7 +51,7 @@ class ConfigDump extends Template
      * @param array $data
      */
     public function __construct(
-        Context $context,
+        Template\Context $context,
         ObjectManagerInterface $objectManager,
         ConfigDataResource $configDataResource,
         Xml $xmlReader,
@@ -73,6 +73,7 @@ class ConfigDump extends Template
      */
     protected function loadConfigDump()
     {
+        // Read the configuration dump from config.php
         // phpcs:disable
         return include BP . '/app/etc/config.php';
         // phpcs:enable
@@ -178,15 +179,16 @@ class ConfigDump extends Template
         foreach ($configArray as $key => $value) {
             $newKey = empty($parentKey) ? $key : $parentKey . $separator . $key;
             if (is_array($value)) {
-                if (strpos($newKey, 'module') !== 0) { // Skip rows with 'module' in parent key
+                if (strpos($newKey, 'modules') !== 0) { // Skip rows with 'module' in parent key
                     $result += $this->flattenConfigArray($value, $newKey, $separator);
+            
                 }
             } else {
                 // Extract the initial key (the first part before $separator)
                 $initialKey = explode($separator, $newKey)[0];
 
                 // Skip rows with 'module' in parent key
-                if ($initialKey !== 'module') {
+                if ($initialKey !== 'modules') {
                     $result[] = [
                         'parent_key' => $initialKey,
                         'key' => $newKey,
