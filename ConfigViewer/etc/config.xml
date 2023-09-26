@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/config.xsd">
     <default>
         <custom_configviewer>
             <cron>
-                <enabled>0</enabled> <!-- Default value for cron enabled -->
-                <schedule>0 * * * *</schedule> <!-- Default value for cron schedule -->
+                <!-- Set the default value for the cron schedule field -->
+                <schedule>* * * * *</schedule>
             </cron>
         </custom_configviewer>
     </default>

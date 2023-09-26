@@ -2,9 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
         <job name="custom_configviewer_clean_table" instance="Custom\ConfigViewer\Cron\CleanTable" method="execute">
-            <schedule>
-                <config_path>configviewer/cron/schedule</config_path>
-            </schedule>
+            <config_path>custom_configviewer/cron/schedule</config_path> <!-- Use config path for Cron Schedule -->
         </job>
     </group>
 </config>

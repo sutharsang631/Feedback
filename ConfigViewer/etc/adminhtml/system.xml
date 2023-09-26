@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="custom" translate="label" sortOrder="100">
-            <label>Custom</label>
-        </tab>
-        <section id="configviewer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="custom_configviewer" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Custom Config Viewer</label>
-            <tab>custom</tab>
+            <tab>general</tab>
             <resource>Custom_ConfigViewer::configviewer</resource>
             <group id="cron" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Cron Configuration</label>
-                <field id="schedule" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="schedule" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Cron Schedule</label>
-                    <comment>Specify the cron schedule in cron expression format (e.g., 0 * * * *)</comment>
+                    <comment>Enter the cron schedule in cron expression format.</comment>
+                    <!-- Set the default value for the cron schedule field -->
+                    <config_path>custom_configviewer/cron/schedule</config_path>
                 </field>
             </group>
         </section>
