@@ -1,7 +1,9 @@
 <?php
 namespace Custom\ConfigViewer\App\Config;
 
-class Initial extends \Magento\Framework\App\Config\Initial
+use Magento\Framework\App\Config\Initial as Initial1;
+
+class Initial extends Initial1
 {
     /**
      * Get default configuration data
