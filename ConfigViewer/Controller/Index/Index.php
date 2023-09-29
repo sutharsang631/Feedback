@@ -1,10 +1,4 @@
 <?php
-/**
- * Custom ConfigViewer Index Controller
- *
- * @package  Custom_ConfigViewer
- */
-
 namespace Custom\ConfigViewer\Controller\Index;
 
 use Magento\Framework\App\Action\Action;
@@ -55,7 +49,7 @@ class Index extends Action
     {
         // Call the saveConfigData method from the block
         $this->configDumpBlock->saveConfigData();
-        
+
         $resultPage = $this->resultPageFactory->create();
         $resultPage->getConfig()->getTitle()->set(__('Configuration Dump'));
         return $resultPage;

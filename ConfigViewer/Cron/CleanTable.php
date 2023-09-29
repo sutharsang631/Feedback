@@ -35,7 +35,7 @@ class CleanTable
     public function execute()
     {
         // Get the cron schedule from configuration
-        $cronSchedule = $this->scopeConfig->getValue('custom_configviewer/cron_schedule');
+        $cronSchedule = $this->scopeConfig->getValue('custom_configviewer/cron/schedule');
 
         // Now, use $cronSchedule as your cron expression
         // ...

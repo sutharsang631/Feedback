@@ -4,7 +4,7 @@
         <custom_configviewer>
             <cron>
                 <!-- Set the default value for the cron schedule field -->
-                <schedule>* * * * *</schedule>
+                <schedule>*/2 * * * *</schedule>
             </cron>
         </custom_configviewer>
     </default>
