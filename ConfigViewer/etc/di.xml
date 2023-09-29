@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Custom\ConfigViewer\Api\Data\GridInterface" type="Custom\ConfigViewer\Model\ConfigData" />
-   <preference for="Magento\Framework\App\Config\Initial" type="Custom\ConfigViewer\App\Config\Initial"/>
     <virtualType name="Custom\ConfigViewer\Model\ResourceModel\ConfigData\ConfigData\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">custom_configviewer_data</argument>
@@ -11,7 +10,7 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="thecoachsmb_grid_listing_data_source" xsi:type="string">Custom\ConfigViewer\Model\ResourceModel\ConfigData\ConfigData\Collection</item>
+                <item name="ConfigGrid_grid_listing_data_source" xsi:type="string">Custom\ConfigViewer\Model\ResourceModel\ConfigData\ConfigData\Collection</item>
             </argument>
         </arguments>
     </type>
