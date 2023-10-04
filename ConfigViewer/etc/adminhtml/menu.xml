@@ -2,6 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
     	<add id="Custom_ConfigViewer::gridmanager" title="Dump" module="Custom_ConfigViewer" sortOrder="10" resource="Custom_ConfigViewer::gridmanager"/>
-    	<add id="Custom_ConfigViewer::create" title="Grid Manager" module="Custom_ConfigViewer" sortOrder="20" parent="Custom_ConfigViewer::gridmanager" action="ConfigGrid/grid/index" resource="Custom_ConfigViewer::create"/>
+    	<add id="Custom_ConfigViewer::create" title="Grid Manager" module="Custom_ConfigViewer" sortOrder="20" parent="Custom_ConfigViewer::gridmanager" action="configgrid/grid/index" resource="Custom_ConfigViewer::create"/>
     </menu>
 </config>

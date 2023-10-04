@@ -10,7 +10,6 @@
                 <field id="schedule" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Cron Schedule</label>
                     <comment>Enter the cron schedule in cron expression format.</comment>
-                    <!-- Set the default value for the cron schedule field -->
                     <config_path>custom_configviewer/cron/schedule</config_path>
                 </field>
             </group>

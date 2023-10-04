@@ -162,17 +162,18 @@ class ConfigDump extends Template
      */
     public function getLastExecutionTime()
     {
-        // Get the last execution time of your custom cron job
         $jobCode = 'custom_configviewer_clean_table';
-        $connection = $this->configDataCollectionFactory->create()->getConnection();
-        $select = $connection->select()
-            ->from(['s' => $connection->getTableName('cron_schedule')], ['executed_at'])
-            ->where('job_code = ?', $jobCode)
-            ->order('executed_at DESC')
-            ->limit(1);
 
-        $lastExecutedAt = $connection->fetchOne($select);
-        
+        $connection = $this->configDataCollectionFactory->create()->getConnection();
+        $lastExecutedAt = $connection->fetchOne(
+            $connection
+                ->select()
+                ->from(['s' => $connection->getTableName('cron_schedule')], ['executed_at'])
+                ->where('job_code = ?', $jobCode)
+                ->order('executed_at DESC')
+                ->limit(1)
+        );
+
         return $lastExecutedAt;
     }
 }
