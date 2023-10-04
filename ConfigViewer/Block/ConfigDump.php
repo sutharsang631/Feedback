@@ -4,7 +4,6 @@ namespace Custom\ConfigViewer\Block;
 use Magento\Framework\View\Element\Template;
 use Custom\ConfigViewer\Model\ResourceModel\ConfigData\CollectionFactory;
 use Magento\Cron\Model\Schedule;
-use Custom\ConfigViewer\Model\ConfigData;
 
 /**
  * Class ConfigDump
@@ -29,11 +28,6 @@ class ConfigDump extends Template
     protected $configDump;
 
     /**
-     * @var \Custom\ConfigViewer\Model\ResourceModel\ConfigData\Collection
-     */
-    protected $configDataCollection;
-
-    /**
      * ConfigDump constructor.
      *
      * @param Template\Context $context
@@ -51,7 +45,6 @@ class ConfigDump extends Template
         $this->configDataCollectionFactory = $configDataCollectionFactory;
         $this->schedule = $schedule;
         $this->configDump = $this->loadConfigDump();
-        $this->configDataCollection = $this->configDataCollectionFactory->create();
     }
 
     /**
@@ -93,16 +86,15 @@ class ConfigDump extends Template
     {
         $configArray = $this->getConfigArray();
         $flattenedConfig = $this->flattenConfigArray($configArray);
-        $mergedConfig = [];
 
-        foreach ($flattenedConfig as $data) { 
+        foreach ($flattenedConfig as $data) {
             $parentKey = $data['parent_key'];
             $key = $data['key'];
             $value = $data['value'];
             $existingData = $this->getConfigDataByKeys($parentKey, $key);
 
             if (!$existingData || !$existingData->getId()) {
-                $configDataModel = $this->configDataCollection->getNewEmptyItem();
+                $configDataModel = $this->configDataCollectionFactory->create()->getNewEmptyItem();
                 $configDataModel->setData([
                     'parent_key' => $parentKey,
                     'key' => $key,
@@ -122,7 +114,8 @@ class ConfigDump extends Template
      */
     private function getConfigDataByKeys($parentKey, $key)
     {
-        $configData = $this->configDataCollection->addFieldToFilter('parent_key', $parentKey)
+        $configDataCollection = $this->configDataCollectionFactory->create();
+        $configData = $configDataCollection->addFieldToFilter('parent_key', $parentKey)
             ->addFieldToFilter('key', $key)
             ->getFirstItem();
 
@@ -169,14 +162,17 @@ class ConfigDump extends Template
      */
     public function getLastExecutionTime()
     {
-        
+        // Get the last execution time of your custom cron job
         $jobCode = 'custom_configviewer_clean_table';
-        $lastSchedule = $this->schedule->getCollection()
-            ->addFieldToFilter('job_code', $jobCode)
-            ->setOrder('executed_at', 'DESC')
-            ->setPageSize(1)
-            ->getFirstItem();
+        $connection = $this->configDataCollectionFactory->create()->getConnection();
+        $select = $connection->select()
+            ->from(['s' => $connection->getTableName('cron_schedule')], ['executed_at'])
+            ->where('job_code = ?', $jobCode)
+            ->order('executed_at DESC')
+            ->limit(1);
 
-        return $lastSchedule->getExecutedAt();
+        $lastExecutedAt = $connection->fetchOne($select);
+        
+        return $lastExecutedAt;
     }
 }
