@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Custom\ConfigViewer\Api\Data\GridInterface" type="Custom\ConfigViewer\Model\ConfigData" />
+    <virtualType name="Custom\ConfigViewer\Model\ResourceModel\ConfigData\ConfigData\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">custom_configviewer_data</argument>
+            <argument name="resourceModel" xsi:type="string">Custom\ConfigViewer\Model\ResourceModel\ConfigData</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="configgrid_grid_listing_data_source" xsi:type="string">Custom\ConfigViewer\Model\ResourceModel\ConfigData\ConfigData\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Custom\ConfigViewer\Cron\CleanTable">
+        <arguments>
+            <argument name="resourceConnection" xsi:type="object">\Magento\Framework\App\ResourceConnection</argument>
+        </arguments>
+    </type>
+</config>
