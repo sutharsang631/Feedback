@@ -1,0 +1,19 @@
+<p>Last Execution Time: <?= $escaper->escapeHtml($block->getLastExecutionTime()) ?></p>
+<table class="data table" id="custom-config-table">
+    <thead>
+        <tr>
+            <th>Parent Key</th>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($block->flattenConfigArray($block->getConfigArray()) as $data): ?>
+            <tr>
+                <td><?= $escaper->escapeHtml($data['parent_key']) ?></td>
+                <td><?= $escaper->escapeHtml($data['key']) ?></td>
+                <td><?= $escaper->escapeHtml($data['value']) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
